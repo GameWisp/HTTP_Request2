@@ -17,8 +17,12 @@
  * @license   http://opensource.org/licenses/BSD-3-Clause BSD 3-Clause License
  * @link      http://pear.php.net/package/HTTP_Request2
  */
-
+''
 /** Class representing a HTTP request message */
+if (!class_exists('HTTP_Request2', true)) {
+    require_once 'HTTP/Request2.php';
+}
+
 require_once 'HTTP/Request2.php';
 
 /**

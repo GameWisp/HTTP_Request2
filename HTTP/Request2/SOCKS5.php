@@ -19,7 +19,10 @@
  */
 
 /** Socket wrapper class used by Socket Adapter */
-require_once 'HTTP/Request2/SocketWrapper.php';
+if (!class_exists('HTTP_Request2_SocketWrapper', true)) {
+    require_once 'HTTP/Request2/SocketWrapper.php';
+}
+
 
 /**
  * SOCKS5 proxy connection class (used by Socket Adapter)

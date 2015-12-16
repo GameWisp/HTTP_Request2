@@ -19,7 +19,11 @@
  * @link      http://pear.php.net/package/HTTP_Request2
  */
 
-require_once 'HTTP/Request2/Response.php';
+
+if (!class_exists('HTTP_Request2_Response', true)) {
+    require_once 'HTTP/Request2/Response.php';
+}
+
 
 /**
  * An observer that saves response body to stream, possibly uncompressing it

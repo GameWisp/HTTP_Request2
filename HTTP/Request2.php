@@ -28,7 +28,9 @@ if (!class_exists('Net_URL2', true)) {
 /**
  * Exception class for HTTP_Request2 package
  */
-require_once 'HTTP/Request2/Exception.php';
+if (!class_exists('HTTP_Request2_Exception', true)) {
+    require_once 'HTTP/Request2/Exception.php';
+}
 
 /**
  * Class representing a HTTP request message
@@ -796,11 +798,6 @@ class HTTP_Request2 implements SplSubject
      *                                   encoded by Content-Encoding</li>
      *   <li>'receivedBody'            - after receiving the complete response
      *                                   body, data is HTTP_Request2_Response object</li>
-     *   <li>'warning'                 - a problem arose during the request
-     *                                   that is not severe enough to throw
-     *                                   an Exception, data is the warning
-     *                                   message (string). Currently dispatched if
-     *                                   response body was received incompletely.</li>
      * </ul>
      * Different adapters may not send all the event types. Mock adapter does
      * not send any events to the observers.
@@ -836,12 +833,12 @@ class HTTP_Request2 implements SplSubject
                 if (false === strpos($adapter, '_')) {
                     $adapter = 'HTTP_Request2_Adapter_' . ucfirst($adapter);
                 }
-                if (!class_exists($adapter, false)
+                if (!class_exists($adapter, true)
                     && preg_match('/^HTTP_Request2_Adapter_([a-zA-Z0-9]+)$/', $adapter)
                 ) {
                     include_once str_replace('_', DIRECTORY_SEPARATOR, $adapter) . '.php';
                 }
-                if (!class_exists($adapter, false)) {
+                if (!class_exists($adapter, true)) {
                     throw new HTTP_Request2_LogicException(
                         "Class {$adapter} not found",
                         HTTP_Request2_Exception::MISSING_VALUE
@@ -1029,7 +1026,7 @@ class HTTP_Request2 implements SplSubject
         }
         // (deprecated) mime_content_type function available
         if (empty($info) && function_exists('mime_content_type')) {
-            $info = mime_content_type($filename);
+            return mime_content_type($filename);
         }
         return empty($info)? 'application/octet-stream': $info;
     }

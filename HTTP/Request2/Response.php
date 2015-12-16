@@ -21,7 +21,9 @@
 /**
  * Exception class for HTTP_Request2 package
  */
-require_once 'HTTP/Request2/Exception.php';
+if (!class_exists('HTTP_Request2_Exception', true)) {
+    require_once 'HTTP/Request2/Exception.php';
+}
 
 /**
  * Class representing a HTTP response

@@ -21,7 +21,10 @@
 /**
  * Class representing a HTTP response
  */
-require_once 'HTTP/Request2/Response.php';
+
+if (!class_exists('HTTP_Request2_Response', true)) {
+    require_once 'HTTP/Request2/Response.php';
+}
 
 /**
  * Base class for HTTP_Request2 adapters

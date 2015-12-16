@@ -18,8 +18,12 @@
  * @link      http://pear.php.net/package/HTTP_Request2
  */
 
-/** Exception class for HTTP_Request2 package */
-require_once 'HTTP/Request2/Exception.php';
+/**
+ * Exception class for HTTP_Request2 package
+ */
+if (!class_exists('HTTP_Request2_Exception', true)) {
+    require_once 'HTTP/Request2/Exception.php';
+}
 
 /**
  * Class for building multipart/form-data request body

@@ -21,7 +21,10 @@
 /**
  * Base class for exceptions in PEAR
  */
-require_once 'PEAR/Exception.php';
+
+if (!class_exists('PEAR_Exceptoin', true)) {
+    require_once 'PEAR/Exception.php';
+}
 
 /**
  * Base exception class for HTTP_Request2 package

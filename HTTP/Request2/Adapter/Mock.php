@@ -21,7 +21,9 @@
 /**
  * Base class for HTTP_Request2 adapters
  */
-require_once 'HTTP/Request2/Adapter.php';
+if (!class_exists('HTTP_Request2_Adapter', true)) {
+    require_once 'HTTP/Request2/Adapter.php';
+}
 
 /**
  * Mock adapter intended for testing
